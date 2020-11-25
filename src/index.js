@@ -84,7 +84,7 @@ function showError(error) {
 function getPosition(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric`; //constructApiUrl(lat, long);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`; //constructApiUrl(lat, long);
   axios.get(apiUrl).then(showTemperature).catch(showError);
 }
 

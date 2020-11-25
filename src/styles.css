@@ -1,0 +1,85 @@
+body {
+  text-align: center;
+}
+
+.main-container {
+  color: #fff;
+  background-image: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
+  padding: 0;
+  margin: 20px auto;
+}
+
+.card-body {
+  padding: 50px 0;
+}
+
+.card {
+  background-color: transparent;
+}
+
+.current-location {
+  font-size: 30px;
+}
+
+h6 {
+  color: rgb(230, 201, 40);
+  font-size: 20px;
+}
+
+.emoji-current-weather {
+  font-size: 40px;
+  margin: 0;
+}
+
+.current-temperature {
+  font-size: 35px;
+  display: inline;
+}
+
+.button-celsius,
+.button-fahrenheit {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-size: 15px;
+  padding: 0;
+}
+
+.button-celsius:hover,
+.button-fahrenheit:hover {
+  text-decoration: underline;
+}
+
+.time-date {
+  padding: 50px 0 20px;
+  font-size: 20px;
+}
+
+.search-bar {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-location-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.search-location-button:hover {
+  background-color: rgb(230, 201, 40);
+  border-radius: 5px;
+  transition: ease-in-out 250ms;
+}
+
+.button-location {
+  background-color: cadetblue;
+  border: none;
+  border-radius: 5px;
+  display: block;
+  margin-left: 0;
+}
+.emoji-6d-forecast {
+  font-size: 30px;
+}

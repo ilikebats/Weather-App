@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherApp</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container main-container">
+      <div class="row">
+        <div class="col-md">
+          <!--Start of Card-->
+          <div class="card" style="width: 30rem">
+            <div class="card-body">
+              <h5 class="card-title current-location" id="location">Frankfurt am Main, Germany</h5>
+              <h6 class="card-subtitle mb-2" id="weather">Mostly cloudy</h6>
+              <p class="card-text">
+               <p class="emoji-current-weather">
+                   ☁️
+                </p> 
+                <p class="current-temperature">
+                 18°
+                </p>
+                <button class="button-celsius">C</button>|<button class="button-fahrenheit">F</button>
+              </p>
+            </div>
+          </div>
+          <!--End of Card-->
+        </div>
+        <div class="col-sm">
+          <section class="time-date">
+            <p>
+              21:57
+              <br />
+              Thursday 22 October
+            </p>
+          </section>
+          <div class="row">
+            <div class="col-md">
+             <button class="button-location">📍</button>
+              <form id= "search-form">
+                <input class="search-bar" type="search" placeholder="search for a location" id="search-bar-input" autocomplete="off"/>
+                <input class="search-location-button" type="submit" value="🔍" />
+              </form> 
+            </div>
+          </div> 
+          
+        </div>
+      </div>
+
+      <div class="card-group">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+                Friday
+            </h5>
+            <p class="card-text">
+            <p class="date-forecast">
+                23/10
+            </p>
+            <p class="emoji-6d-forecast">
+                🌧
+            </p>
+            <p class="temperature-6d-forecast">
+                16°/11°
+            </p>
+        </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Saturday</h5>
+            <p class="card-text">
+                <p class="date-forecast">
+              24/10
+            </p>
+              <p class="emoji-6d-forecast">
+              ☁️
+            </p>
+              <p class="temperature-6d-forecast">
+              16°/10°
+            </p>
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Sunday</h5>
+            <p class="card-text">
+                <p class="date-forecast">
+              25/10
+            </p>
+            <p class="emoji-6d-forecast">
+              🌦
+            </p>
+              <p class="temperature-6d-forecast">
+              18°/10°
+            </p>
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Monday</h5>
+            <p class="card-text">
+                <p class="date-forecast">
+              26/10
+            </p>
+              <p class="emoji-6d-forecast">
+              🌧
+            </p>
+              <p class="temperature-6d-forecast">
+              12°/7°
+            </p>
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Tuesday</h5>
+            <p class="card-text">
+                <p class="date-forecast">
+              27/10
+            </p>
+              <p class="emoji-6d-forecast">
+              🌤
+            </p>
+              <p class="temperature-6d-forecast">
+              13°/8°
+            </p>
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Wednesday</h5>
+            <p class="card-text">
+                <p class="date-forecast">
+              28/10
+            </p>
+              <p class="emoji-6d-forecast">
+              ☀️
+            </p>
+              <p class="temperature-6d-forecast">
+              15°/9°
+            </p>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>

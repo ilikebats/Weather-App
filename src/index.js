@@ -58,9 +58,31 @@ function showTemperature(response) {
   let weather = document.querySelector("#weather");
   let displayedLocation = document.querySelector("#location");
 
+  updateWeatherEmoji(response.data.weather[0].main);
+
   displayedLocation.innerHTML = response.data.name;
   weather.innerHTML = response.data.weather[0].description;
   displayTemperature.innerHTML = `${currentTemperature}°C `;
+}
+
+function updateWeatherEmoji(main) {
+  let weatherEmoji = document.querySelector(".emoji-current-weather");
+
+  if (main === "Clouds") {
+    weatherEmoji.innerHTML = "☁️";
+  } else if (main === "Rain") {
+    weatherEmoji.innerHTML = "🌧";
+  } else if (main === "Snow") {
+    weatherEmoji.innerHTML = "🌨";
+  } else if (main === "Drizzle") {
+    weatherEmoji.innerHTML = "☔️";
+  } else if (main === "Clear") {
+    weatherEmoji.innerHTML = "☀️";
+  } else if (main === "Thunderstorm") {
+    weatherEmoji.innerHTML = "🌩";
+  } else {
+    weatherEmoji.innerHTML = "🌫";
+  }
 }
 //Search Form
 
@@ -85,6 +107,7 @@ function getPosition(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`; //constructApiUrl(lat, long);
+
   axios.get(apiUrl).then(showTemperature).catch(showError);
 }
 

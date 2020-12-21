@@ -65,9 +65,11 @@ function showTemperature(response) {
 
   updateWeatherEmoji(response.data.weather[0].main);
 
+  celsiusTemperature = response.data.main.temp;
+
   displayedLocation.innerHTML = response.data.name;
   weather.innerHTML = response.data.weather[0].description;
-  displayTemperature.innerHTML = `${currentTemperature}°C `;
+  displayTemperature.innerHTML = currentTemperature;
 }
 
 function updateWeatherEmoji(main) {
@@ -93,11 +95,28 @@ function updateWeatherEmoji(main) {
 
 //Convert Temperature
 
-//function convertToCelsius() {currentTemp.innerHTML = "18°";}
+let celsiusTemperature = null;
 
-//function convertToFahrenheit() {currentTemp.innerHTML = "64°";}
-//let currentTemp = document.querySelector(".current-temperature"); let clickCelsius = document.querySelector(".button-celsius");let clickFahrenheit = document.querySelector(".button-fahrenheit");clickCelsius.addEventListener("click", convertToCelsius);clickFahrenheit.addEventListener("click", convertToFahrenheit);
+let fahrenheitButton = document.querySelector(".button-fahrenheit");
+fahrenheitButton.addEventListener("click", showFahrenheitTemp);
 
+let celsiusButton = document.querySelector(".button-celsius");
+celsiusButton.addEventListener("click", showCelsiusTemp);
+
+function showFahrenheitTemp() {
+  let temperatureElement = document.querySelector(".current-temperature");
+  celsiusButton.classList.remove("active");
+  fahrenheitButton.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function showCelsiusTemp() {
+  let temperatureElement = document.querySelector(".current-temperature");
+  celsiusButton.classList.add("active");
+  fahrenheitButton.classList.remove("active");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
 //Convert Temperature
 
 function showError(error) {

@@ -43,7 +43,7 @@ h6 {
 }
 
 .current-temperature {
-  font-size: 35px;
+  font-size: 55px;
   display: inline;
 }
 
@@ -52,13 +52,19 @@ h6 {
   border: none;
   background-color: transparent;
   color: #fff;
-  font-size: 15px;
+  font-size: 20px;
   padding: 0;
 }
 
 .button-celsius:hover,
 .button-fahrenheit:hover {
   text-decoration: underline;
+}
+
+.unit-conversion .active {
+  color: #4352b0;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .time-date {

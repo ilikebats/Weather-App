@@ -4,7 +4,18 @@ body {
 
 .main-container {
   color: #fff;
-  background-image: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
+  background-image: linear-gradient(
+    to top,
+    #3f51b1 0%,
+    #5a55ae 13%,
+    #7b5fac 25%,
+    #8f6aae 38%,
+    #a86aa4 50%,
+    #cc6b8e 62%,
+    #f18271 75%,
+    #f3a469 87%,
+    #f7c978 100%
+  );
   padding: 0;
   margin: 20px auto;
 }
@@ -22,7 +33,7 @@ body {
 }
 
 h6 {
-  color: rgb(230, 201, 40);
+  color: rgb(228, 66, 228);
   font-size: 20px;
 }
 
@@ -68,18 +79,23 @@ h6 {
 }
 
 .search-location-button:hover {
-  background-color: rgb(230, 201, 40);
+  background-color: rgb(228, 66, 228, 0.5);
   border-radius: 5px;
   transition: ease-in-out 250ms;
 }
 
 .button-location {
-  background-color: cadetblue;
+  background-color: transparent;
   border: none;
   border-radius: 5px;
-  display: block;
-  margin-left: 0;
 }
+
+.button-location:hover {
+  background-color: rgb(228, 66, 228, 0.5);
+  border-radius: 5px;
+  transition: ease-in-out 250ms;
+}
+
 .emoji-6d-forecast {
   font-size: 30px;
 }

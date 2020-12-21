@@ -40,17 +40,22 @@ currentTimeDate.innerHTML = formatDate(new Date());
 
 //Search Form
 let apiKey = "5c6b7792cc22bbb049a8d965ebc483a8";
+let searchForm = document.querySelector("#search-form");
 
-function searchLocation(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-bar-input");
-
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=metric&appid=${apiKey}`;
-
+function searchLocation(location) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(showTemperature).catch(showError);
 }
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", searchLocation);
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-bar-input");
+  searchLocation(searchInput.value);
+}
+
+searchForm.addEventListener("submit", handleSubmit);
+
+searchLocation("Frankfurt");
 
 function showTemperature(response) {
   let currentTemperature = Math.round(response.data.main.temp);
@@ -113,8 +118,8 @@ function getPosition(position) {
 
 /**
  * This function construct an Api URL using latitude and longitude.
- * @param {number} lat
  * @param {number} lng
+ * @param {number} lat
  * @returns {string} url
  */
 //function constructApiUrl(lat, lng) {

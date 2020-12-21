@@ -43,8 +43,13 @@ h6 {
 }
 
 .current-temperature {
-  font-size: 55px;
+  font-size: 64px;
   display: inline;
+}
+
+span {
+  position: relative;
+  top: -23px;
 }
 
 .button-celsius,
@@ -61,10 +66,15 @@ h6 {
   text-decoration: underline;
 }
 
-.unit-conversion .active {
+.units .active {
   color: #4352b0;
   font-size: 25px;
   font-weight: bold;
+  text-decoration: none;
+}
+
+button:focus {
+  outline: none;
 }
 
 .time-date {

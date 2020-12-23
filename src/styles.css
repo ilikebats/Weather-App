@@ -83,15 +83,25 @@ button:focus {
 }
 
 .search-bar {
-  outline: none;
-  border: none;
+  border-color: mediumslateblue;
+  border-width: 3px;
   border-radius: 5px;
+  box-shadow: rgb(107, 82, 125) 10px 10px 10px;
+  padding: 15px;
+  font-family: monospace;
+  min-width: 250px;
 }
 
 .search-location-button {
   background-color: transparent;
-  border: none;
+  border-radius: 5px;
+  border-color: mediumslateblue;
+  border-width: 3px;
   outline: none;
+  font-size: 32px;
+  padding: 1px 6px 1px;
+  position: relative;
+  top: 8px;
 }
 
 .search-location-button:hover {
@@ -104,6 +114,7 @@ button:focus {
   background-color: transparent;
   border: none;
   border-radius: 5px;
+  font-size: 30px;
 }
 
 .button-location:hover {

@@ -159,7 +159,7 @@ function showTemperature(response) {
 
   celsiusTemperature = response.data.main.temp;
 
-  displayedLocation.innerHTML = response.data.name;
+  displayedLocation.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
   weather.innerHTML = response.data.weather[0].description;
   displayTemperature.innerHTML = currentTemperature;
   feltTempElement.innerHTML = `feels like: ${Math.round(

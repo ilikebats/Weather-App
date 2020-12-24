@@ -66,8 +66,8 @@ function showForecast(response) {
   let dayAtThisIndex = null;
 
   for (let index = 0; index < forecastData.length - 1; index = index + 1) {
-    currentListDate = new Date(forecastData[index].dt_txt);
-    nextListDate = new Date(forecastData[index + 1].dt_txt);
+    currentListDate = new Date(forecastData[index].dt * 1000);
+    nextListDate = new Date(forecastData[index + 1].dt * 1000);
     dayAtThisIndex = forecastData[index];
 
     // If the day we are currently on in the index is different than the day it is today

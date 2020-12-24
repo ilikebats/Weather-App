@@ -36,26 +36,104 @@ function formatDate(date) {
 let currentTimeDate = document.querySelector(".time-date");
 currentTimeDate.innerHTML = formatDate(new Date());
 
-//Time and Date
+// Time and Date
 
-//Search Form
+// Start Search Form
 let apiKey = "5c6b7792cc22bbb049a8d965ebc483a8";
 let searchForm = document.querySelector("#search-form");
 
+// handles api call for the current temperature and the forecast and sends it to the showTemperature and showForecast functions
 function searchLocation(location) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(showTemperature).catch(showError);
+
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrlForecast).then(showForecast).catch(showError);
 }
 
+function showForecast(response) {
+  let dateToday = new Date(); // 23.12.2020
+
+  let forecast = response.data;
+  let forecastData = forecast.list;
+  let forecastElement = document.querySelector("#forecastTemplate");
+  forecastElement.innerHTML = null;
+
+  console.log(forecast);
+
+  let currentListDate = null;
+  let nextListDate = null;
+  let sumMin = [];
+  let sumMax = [];
+  let numberOfDays = 0;
+  let dayAtThisIndex = null;
+
+  let averageMinTemperature = 0;
+  let averageMaxTemperature = 0;
+
+  for (let index = 0; index < forecastData.length - 1; index = index + 1) {
+    currentListDate = new Date(forecastData[index].dt_txt);
+    nextListDate = new Date(forecastData[index + 1].dt_txt);
+    dayAtThisIndex = forecastData[index];
+
+    // If the day we are currently on is different than the day it is today
+    if (currentListDate.getDate() !== dateToday.getDate()) {
+      // If the next day (day with increased index by 1, or the next one in the list) is
+      // different than the day we are currently on
+      if (
+        nextListDate.getDate() !== currentListDate.getDate() ||
+        index === forecastData.length - 2
+      ) {
+        // assign to var sum -> sum + stored temperature
+        sumMin.push(dayAtThisIndex.main.temp_min);
+        sumMax.push(dayAtThisIndex.main.temp_max);
+
+        forecastElement.innerHTML += `
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                  ${weekDays[currentListDate.getDay()]}
+              </h5>
+                <p class="card-text">
+                  <p class="date-forecast">
+                    ${currentListDate.getDate()}/${
+          currentListDate.getMonth() + 1
+        }
+                </p>
+                  <p class="emoji-6d-forecast">
+                      Emoji
+                  </p>
+                      <p class="temperature-6d-forecast">
+                      ↑ ${Math.round(Math.max(...sumMax))}°/${Math.round(
+          Math.min(...sumMin)
+        )}°↓
+                      </p>
+                    </p>
+                  </div>
+          </div>`;
+
+        // reset the counters after completing the day
+        sumMin = [];
+        sumMax = [];
+      } else {
+        sumMin.push(dayAtThisIndex.main.temp_min);
+        sumMax.push(dayAtThisIndex.main.temp_max);
+      }
+    }
+  }
+}
+
+// handles the search submit -> sends the input of user (a location) to the searchLocation function
 function handleSubmit(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-bar-input");
   searchLocation(searchInput.value);
+  searchInput.value = "";
 }
 
 searchForm.addEventListener("submit", handleSubmit);
 
-searchLocation("Frankfurt");
+searchLocation("Miami");
 
 function showTemperature(response) {
   let currentTemperature = Math.round(response.data.main.temp);
@@ -91,9 +169,9 @@ function updateWeatherEmoji(main) {
     weatherEmoji.innerHTML = "🌫";
   }
 }
-//Search Form
+// End of Search Form
 
-//Convert Temperature
+// Start of Convert Temperature
 
 let celsiusTemperature = null;
 
@@ -131,8 +209,10 @@ function getPosition(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`; //constructApiUrl(lat, long);
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=metric&appid=${apiKey}`;
 
   axios.get(apiUrl).then(showTemperature).catch(showError);
+  axios.get(apiUrlForecast).then(showForecast).catch(showError);
 }
 
 /**

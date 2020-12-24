@@ -52,31 +52,28 @@ function searchLocation(location) {
 }
 
 function showForecast(response) {
-  let dateToday = new Date(); // 23.12.2020
+  // assigns the date at this very moment
+  let dateToday = new Date();
 
   let forecast = response.data;
   let forecastData = forecast.list;
   let forecastElement = document.querySelector("#forecastTemplate");
-  forecastElement.innerHTML = null;
 
-  console.log(forecast);
+  // resets the forecast html to avoid building up html with every search submit
+  forecastElement.innerHTML = null;
 
   let currentListDate = null;
   let nextListDate = null;
   let sumMin = [];
   let sumMax = [];
-  let numberOfDays = 0;
   let dayAtThisIndex = null;
-
-  let averageMinTemperature = 0;
-  let averageMaxTemperature = 0;
 
   for (let index = 0; index < forecastData.length - 1; index = index + 1) {
     currentListDate = new Date(forecastData[index].dt_txt);
     nextListDate = new Date(forecastData[index + 1].dt_txt);
     dayAtThisIndex = forecastData[index];
 
-    // If the day we are currently on is different than the day it is today
+    // If the day we are currently on in the index is different than the day it is today
     if (currentListDate.getDate() !== dateToday.getDate()) {
       // If the next day (day with increased index by 1, or the next one in the list) is
       // different than the day we are currently on
@@ -100,7 +97,7 @@ function showForecast(response) {
           currentListDate.getMonth() + 1
         }
                 </p>
-                  <p class="emoji-6d-forecast">
+                  <p class="emoji-6d-forecast forecast-day-${index}">
                       Emoji
                   </p>
                       <p class="temperature-6d-forecast">
@@ -111,6 +108,9 @@ function showForecast(response) {
                     </p>
                   </div>
           </div>`;
+
+        let weatherEmoji = document.querySelector(`.forecast-day-${index}`);
+        updateWeatherEmoji(weatherEmoji, dayAtThisIndex.weather[0].main);
 
         // reset the counters after completing the day
         sumMin = [];
@@ -133,15 +133,16 @@ function handleSubmit(event) {
 
 searchForm.addEventListener("submit", handleSubmit);
 
-searchLocation("Miami");
+searchLocation("Frankfurt");
 
 function showTemperature(response) {
   let currentTemperature = Math.round(response.data.main.temp);
   let displayTemperature = document.querySelector(".current-temperature");
   let weather = document.querySelector("#weather");
   let displayedLocation = document.querySelector("#location");
+  let weatherEmoji = document.querySelector(".emoji-current-weather");
 
-  updateWeatherEmoji(response.data.weather[0].main);
+  updateWeatherEmoji(weatherEmoji, response.data.weather[0].main);
 
   celsiusTemperature = response.data.main.temp;
 
@@ -150,23 +151,23 @@ function showTemperature(response) {
   displayTemperature.innerHTML = currentTemperature;
 }
 
-function updateWeatherEmoji(main) {
-  let weatherEmoji = document.querySelector(".emoji-current-weather");
-
-  if (main === "Clouds") {
-    weatherEmoji.innerHTML = "☁️";
-  } else if (main === "Rain") {
-    weatherEmoji.innerHTML = "🌧";
-  } else if (main === "Snow") {
-    weatherEmoji.innerHTML = "🌨";
-  } else if (main === "Drizzle") {
-    weatherEmoji.innerHTML = "☔️";
-  } else if (main === "Clear") {
-    weatherEmoji.innerHTML = "☀️";
-  } else if (main === "Thunderstorm") {
-    weatherEmoji.innerHTML = "🌩";
+// gets an element and weather description from api response
+// updates the emoji according to the if- statement in the forecast and current weather
+function updateWeatherEmoji(element, description) {
+  if (description === "Clouds") {
+    element.innerHTML = "☁️";
+  } else if (description === "Rain") {
+    element.innerHTML = "🌧";
+  } else if (description === "Snow") {
+    element.innerHTML = "🌨";
+  } else if (description === "Drizzle") {
+    element.innerHTML = "☔️";
+  } else if (description === "Clear") {
+    element.innerHTML = "☀️";
+  } else if (description === "Thunderstorm") {
+    element.innerHTML = "🌩";
   } else {
-    weatherEmoji.innerHTML = "🌫";
+    element.innerHTML = "🌫";
   }
 }
 // End of Search Form
@@ -214,16 +215,6 @@ function getPosition(position) {
   axios.get(apiUrl).then(showTemperature).catch(showError);
   axios.get(apiUrlForecast).then(showForecast).catch(showError);
 }
-
-/**
- * This function construct an Api URL using latitude and longitude.
- * @param {number} lng
- * @param {number} lat
- * @returns {string} url
- */
-//function constructApiUrl(lat, lng) {
-//  return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric`;
-//}
 
 /**
  *

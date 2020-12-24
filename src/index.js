@@ -1,4 +1,3 @@
-//Time and Date
 let weekDays = [
   "Sunday",
   "Monday",
@@ -23,6 +22,7 @@ let months = [
   "December",
 ];
 
+// formats the date and shows it in html
 function formatDate(date) {
   let currentWeekDay = weekDays[date.getDay()];
   let currentMonth = months[date.getMonth()];
@@ -36,9 +36,6 @@ function formatDate(date) {
 let currentTimeDate = document.querySelector(".time-date");
 currentTimeDate.innerHTML = formatDate(new Date());
 
-// Time and Date
-
-// Start Search Form
 let apiKey = "5c6b7792cc22bbb049a8d965ebc483a8";
 let searchForm = document.querySelector("#search-form");
 
@@ -123,7 +120,10 @@ function showForecast(response) {
   }
 }
 
-// handles the search submit -> sends the input of user (a location) to the searchLocation function
+/**
+ * handles the search submit -> sends the input of user (a location) to the searchLocation function
+ * @param {*} event
+ */
 function handleSubmit(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-bar-input");
@@ -133,15 +133,28 @@ function handleSubmit(event) {
 
 searchForm.addEventListener("submit", handleSubmit);
 
+/**
+ * Default location displayed when loading the page.
+ */
 searchLocation("Frankfurt");
 
+/**
+ * Gets a response from an api call
+shows data for current temperature, windspeed, 
+felt temperature and the location in html
+ sends data to updateWeatherEmoji function.
+ * @param {object} response 
+ */
 function showTemperature(response) {
   let currentTemperature = Math.round(response.data.main.temp);
   let displayTemperature = document.querySelector(".current-temperature");
   let weather = document.querySelector("#weather");
   let displayedLocation = document.querySelector("#location");
-  let weatherEmoji = document.querySelector(".emoji-current-weather");
+  let feltTempElement = document.querySelector(".feels-like-temp");
+  let windspeedElement = document.querySelector(".windspeed");
+  let humidityElement = document.querySelector(".humidity");
 
+  let weatherEmoji = document.querySelector(".emoji-current-weather");
   updateWeatherEmoji(weatherEmoji, response.data.weather[0].main);
 
   celsiusTemperature = response.data.main.temp;
@@ -149,10 +162,24 @@ function showTemperature(response) {
   displayedLocation.innerHTML = response.data.name;
   weather.innerHTML = response.data.weather[0].description;
   displayTemperature.innerHTML = currentTemperature;
+  feltTempElement.innerHTML = `feels like: ${Math.round(
+    response.data.main.feels_like
+  )}°C`;
+  windspeedElement.innerHTML = `wind: ${Math.round(
+    response.data.wind.speed
+  )} km/h`;
+  humidityElement.innerHTML = `humidity: ${Math.round(
+    response.data.main.humidity
+  )}%`;
 }
 
-// gets an element and weather description from api response
-// updates the emoji according to the if- statement in the forecast and current weather
+/**
+ * Gets an element and weather description from api response
+ updates the emoji according to the if- statement in the forecast 
+ and current weather.
+ * @param {HTMLParagraphElement} element 
+ * @param {string} description 
+ */
 function updateWeatherEmoji(element, description) {
   if (description === "Clouds") {
     element.innerHTML = "☁️";
@@ -170,9 +197,6 @@ function updateWeatherEmoji(element, description) {
     element.innerHTML = "🌫";
   }
 }
-// End of Search Form
-
-// Start of Convert Temperature
 
 let celsiusTemperature = null;
 
@@ -182,6 +206,9 @@ fahrenheitButton.addEventListener("click", showFahrenheitTemp);
 let celsiusButton = document.querySelector(".button-celsius");
 celsiusButton.addEventListener("click", showCelsiusTemp);
 
+/**
+ * Handles unit-conversion from celsius to fahrenheit for the current temperature.
+ */
 function showFahrenheitTemp() {
   let temperatureElement = document.querySelector(".current-temperature");
   celsiusButton.classList.remove("active");
@@ -190,21 +217,27 @@ function showFahrenheitTemp() {
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
+/**
+ * Handles unit-conversion from fahrenheit to celsius for the current temperature.
+ */
 function showCelsiusTemp() {
   let temperatureElement = document.querySelector(".current-temperature");
   celsiusButton.classList.add("active");
   fahrenheitButton.classList.remove("active");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
-//Convert Temperature
 
+/**
+ * Displays an error in the console.
+ * @param {object} error
+ */
 function showError(error) {
   console.log(error.message);
 }
 
-/**
- *
- * @param {*} position
+/** Gets a position from the startGeolocation function and constructs an api url
+ * sends the result to showTemperature and showForecast functions.
+ * @param {string} position - Position that the user inputs
  */
 function getPosition(position) {
   let lat = position.coords.latitude;
@@ -216,7 +249,7 @@ function getPosition(position) {
   axios.get(apiUrlForecast).then(showForecast).catch(showError);
 }
 
-/**
+/** gets the current position of the user
  *
  */
 function startGeolocation() {

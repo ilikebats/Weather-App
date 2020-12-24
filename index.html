@@ -10,6 +10,12 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="src/styles.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
@@ -20,50 +26,65 @@
           <!--Start of Card-->
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title current-location" id="location">Frankfurt am Main, Germany</h5>
-              <h6 class="card-subtitle mb-2" id="weather">Mostly cloudy</h6>
-              <p class="card-text">
-               <p class="emoji-current-weather">
-                   ☁️
-                </p> 
-                <p class="current-temperature">
-                 18°
-                </p>
-             <span class="units"> 
-               <button class="button-celsius active">°C</button>
-              |<button class="button-fahrenheit">°F</button>
-             </span>
-              </p>
+              <p class="emoji-current-weather">☁️</p>
+              <div class="card-text">
+                <h6 class="card-subtitle mb-2" id="weather">Mostly cloudy</h6>
+                <p class="current-temperature">18°</p>
+                <span class="units">
+                  <button class="button-celsius active">°C</button> |
+                  <button class="button-fahrenheit">°F</button>
+                </span>
+              </div>
+              <div class="feels-like-temp">feels like 7°</div>
+              <div class="windspeed">Wind: 7km/h</div>
+              <div class="humidity">Humidity: 75%</div>
             </div>
           </div>
           <!--End of Card-->
         </div>
-        <div class="col-sm">
-          <section class="time-date">
-            <p>
-              21:57
-              <br />
-              Thursday 22 October
-            </p>
-          </section>
+        <div class="col-md">
+          <button class="button-location">
+            <i class="fas fa-map-marker-alt"></i>
+          </button>
+          <form id="search-form">
+            <input
+              class="search-bar"
+              type="search"
+              placeholder="search for a location"
+              id="search-bar-input"
+              autocomplete="off"
+            />
+            <input class="search-location-button" type="submit" value="🔍" />
+          </form>
           <div class="row">
-            <div class="col-md">
-             
-              <button class="button-location">📍</button>
-              <form id= "search-form">
-                <input class="search-bar" type="search" placeholder="search for a location" id="search-bar-input" autocomplete="off"/>
-              </form> 
-              <input class="search-location-button" type="submit" value="🔍" />
+            <div class="col-sm">
+              <h5 class="card-title current-location" id="location">
+                Frankfurt am Main, Germany
+              </h5>
+              <section class="time-date">
+                <p>
+                  21:57
+                  <br />
+                  Thursday 22 October
+                </p>
+              </section>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
-
-      <div class="card-group" id="forecastTemplate">
-
-      </div>
+      <div class="card-group" id="forecastTemplate"></div>
     </div>
-    <p><a href="https://github.com/ilikebats/Weather-App" target="_blank">Open-source code</a> by Stefanie Hollocker</p>
+    <p>
+      <a href="https://github.com/ilikebats/Weather-App" target="_blank"
+        >Open-source code</a
+      >
+      by
+      <a
+        href="https://www.linkedin.com/in/stefanie-hollocker-1a390515a/"
+        target="_blank"
+        >Stefanie Hollocker</a
+      >
+    </p>
     <script src="src/index.js"></script>
   </body>
 </html>

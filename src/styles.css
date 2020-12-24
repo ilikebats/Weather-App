@@ -2,7 +2,15 @@ body {
   text-align: center;
 }
 
+.col-md,
+.row {
+  padding: 0;
+  margin: 0;
+}
+
 .main-container {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: #fff;
   background-image: linear-gradient(
     to top,
@@ -17,11 +25,12 @@ body {
     #f7c978 100%
   );
   padding: 0;
-  margin: 20px auto;
+  margin: 50px auto;
+  border-radius: 10px;
 }
 
 .card-body {
-  padding: 50px 0;
+  padding: 25px 0 50px;
 }
 
 .card {
@@ -32,13 +41,19 @@ body {
   font-size: 30px;
 }
 
+h5 {
+  text-align: center;
+  margin-top: 50px;
+}
+
 h6 {
-  color: rgb(228, 66, 228);
-  font-size: 20px;
+  color: #f521a9;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .emoji-current-weather {
-  font-size: 40px;
+  font-size: 95px;
   margin: 0;
 }
 
@@ -67,7 +82,7 @@ span {
 }
 
 .units .active {
-  color: #4352b0;
+  color: #4f439a;
   font-size: 25px;
   font-weight: bold;
   text-decoration: none;
@@ -93,7 +108,7 @@ button:focus {
 }
 
 .search-location-button {
-  background-color: transparent;
+  background-color: mediumslateblue;
   border-radius: 5px;
   border-color: mediumslateblue;
   border-width: 3px;
@@ -105,12 +120,21 @@ button:focus {
 }
 
 .search-location-button:hover {
-  background-color: rgb(228, 66, 228, 0.5);
+  background-color: transparent;
   border-radius: 5px;
   transition: ease-in-out 250ms;
 }
 
+i {
+  color: slateblue;
+}
+
+i:hover {
+  color: #fff;
+}
+
 .button-location {
+  margin-top: 50px;
   background-color: transparent;
   border: none;
   border-radius: 5px;
@@ -118,11 +142,24 @@ button:focus {
 }
 
 .button-location:hover {
-  background-color: rgb(228, 66, 228, 0.5);
+  background-color: transparent;
   border-radius: 5px;
   transition: ease-in-out 250ms;
 }
 
 .emoji-6d-forecast {
   font-size: 30px;
+}
+
+/* styling for devices less than 768px */
+@media (max-width: 768px) {
+  .main-container {
+    margin: 0;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  .card-group > .card {
+    margin-bottom: 0;
+  }
 }
